@@ -224,7 +224,7 @@ class emailController extends Controller
 		->where('elsemployees_empid','=',$request->user_id)
 		->where('elsemployees_status','=',2)
 		->first();
-		$getinboxlist = DB::table('emaillist')
+		$getinboxlist = DB::table('sentemaillist')
 		->select('*')
 		->where('senderemail','=',$getemail->elsemployees_emailaddress)
 		->where('emailmaster_isreceiveorsent','=',0)
@@ -235,7 +235,7 @@ class emailController extends Controller
 		->get();
 		$getinboxlist = $this->paginate($getinboxlist);
 		if($getinboxlist){
-			return response()->json(['data' => $getinboxlist,'message' => 'Inbox Email List'],200);
+			return response()->json(['data' => $getinboxlist,'message' => 'Sent Email List'],200);
 		}else{
 			$emptyarray = array();
 			return response()->json(['data' => $emptyarray,'message' => 'No Email'],200);
